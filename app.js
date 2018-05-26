@@ -13,7 +13,7 @@ const dotenv = require('dotenv');
 dotenv.load('./env');
 
 // Constants
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 const DEBUG = process.env.DEBUG || false;
 const BASE_DIR = __dirname;
 
