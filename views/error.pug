@@ -1,0 +1,9 @@
+extends base
+
+block content
+    .text-center
+        h1(style="color: crimson;") Error: #{err.message}
+        h3 Status #{err.status}
+        if DEBUG
+            .text-left.my-5
+                pre= err.stack

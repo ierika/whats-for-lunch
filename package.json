@@ -1,0 +1,24 @@
+{
+  "name": "whats_for_lunch",
+  "version": "1.0.0",
+  "description": "To help us pick what's for lunch.",
+  "main": "app.js",
+  "scripts": {
+    "test": "which node || exit 1"
+  },
+  "keywords": [
+    "node.js",
+    "javascript",
+    "tool"
+  ],
+  "author": "haloerika@gmail.com",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "chalk": "^2.4.1",
+    "dotenv": "^5.0.1",
+    "express": "^4.16.3",
+    "mongoose": "^5.1.2",
+    "pug": "^2.0.3"
+  }
+}

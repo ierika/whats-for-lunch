@@ -1,0 +1,16 @@
+extends base
+
+block content
+    .row.search-wrapper
+        .col.s12.m6.offset-m3
+            .row
+                .input-field.col.s12
+                    input(type="text")#autocomplete-input.autocomplete
+                    label(for="autocomplete-input") Search
+
+            .row.center-align.my-5
+                .col.s12
+                    a(href="javascript:void(0)")#pick-restaurant.waves-effect.waves-light.btn-large Pick a restaurant
+
+    .floater-right-bottom
+        <a class="btn-floating btn-large waves-effect waves-light red"><i class="material-icons">add</i></a>

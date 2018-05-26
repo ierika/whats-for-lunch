@@ -1,0 +1,38 @@
+doctype html
+html
+    head
+        meta(charset="utf-8")
+        meta(name="viewport",
+             content="width=device-width, initial-scale=1, shrink-to-fit=no")
+        title= config.SITE_NAME
+        link(href="/static/css/base.css" rel="stylesheet")
+        link(href="/static/vendor/css/materialize.min.css" rel="stylesheet")
+        link(href="https://fonts.googleapis.com/icon?family=Material+Icons", rel="stylesheet")
+
+    body
+        .navbar-fixed
+            nav.pink.lighten-1
+                .nav-wrapper
+                    a(href="/").brand-logo
+                        h1.hide= config.SITE_NAME
+                        h5.brand-text &nbsp;#{config.SITE_NAME}&nbsp
+                            br
+                            span.slogan.hide-on-small-only= config.SLOGAN
+                    ul#nav.mobile.right.hide-on-med-and-down
+                        li
+                            a(href="/") Home
+
+        .container
+            .col.s12
+                block content
+
+    footer.page-footer.cyan.accent-4
+        .footer-copyright
+            .container= `© 2018 What's for lunch`
+                span.right Made in Node.js with love by 
+                    a(href="https://github.com/iErika", target="_blank" style="color: #fafafa;") Erika Suzuki
+                    
+    script(src="/static/vendor/js/jquery-3.3.1.min.js")
+    script(src="/static/vendor/js/materialize.min.js")
+    script(src="/static/js/app.js")
+    block inline_script
