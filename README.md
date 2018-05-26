@@ -1,5 +1,5 @@
 # What's For Lunch
-To help us decide where to go for lunch.
+To help us decide where to go for lunch. The app is deployed [here](https://whatslunch.herokuapp.com/) using a Heroku free tier plan.
 Written in Node.js using Express.js framework.
 I made this app mainly for the purpose of practicing Node.js.
 
@@ -9,4 +9,3 @@ TODO:
 - Use Google Maps API to calculate distances and to show directions.
 - Add commenting service.
 - All CRUD must be through an API.
-
