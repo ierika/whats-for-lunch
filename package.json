@@ -4,7 +4,8 @@
   "description": "To help us pick what's for lunch.",
   "main": "app.js",
   "scripts": {
-    "test": "which node || exit 1"
+    "test": "which node || exit 1",
+    "start": "node app.js"
   },
   "keywords": [
     "node.js",
