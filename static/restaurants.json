@@ -1,0 +1,108 @@
+{
+    "restaurants": [
+        {
+            "name": "Wako",
+            "description": "Tonkatsu place",
+            "cuisine": "Japanese"
+        },
+        {
+            "name": "Pizzeria Peppe",
+            "description": "Best Italian place in the area.",
+            "cuisine": "Italian"
+        },
+        {
+            "name": "Wolfgang Puck",
+            "description": "A decent Italian place. A little pricey.",
+            "cuisine": "Italian"
+        },
+        {
+            "name": "Taco Rico",
+            "description": "Burrito!",
+            "cuisine": "Tex-Mex"
+        },
+        {
+            "name": "Maguro Dake",
+            "description": "Best tuna bowl in the area!",
+            "cuisine": "Japanese"
+        },
+        {
+            "name": "French up the hill",
+            "description": "Butter!",
+            "cuisine": "French"
+        },
+        {
+            "name": "Balcony",
+            "description": "Cost-performance French place. Probably the best French here.",
+            "cuisine": "French"
+        },
+        {
+            "name": "Green Brothers",
+            "description": "Salad place located at the building next to us.",
+            "cuisine": "Hippie Meal"
+        },
+        {
+            "name": "Salad Stop",
+            "description": "The closest salad place. Just located at the 2nd floor of this building.",
+            "cuisine": "Hippie Meal"
+        },
+        {
+            "name": "Nirvanam",
+            "description": "Best Indian in the area. 50% chance of free drinks.",
+            "cuisine": "Indian"
+        },
+        {
+            "name": "Indian buffet at Izumi Tower",
+            "cuisine": "Indian"
+        },
+        {
+            "name": "七草",
+            "description": "Shabu-shabu place!",
+            "cuisine": "Japanese"
+        },
+        {
+            "name": "Trattoria",
+            "description": "Italian place located at Izumi Tower next to the Shabu place.",
+            "cuisine": "Italian"
+        },
+        {
+            "name": "Jasmine Thai",
+            "description": "Best Thai food in the area. Expect to walk 15 minutes each way though.",
+            "cuisine": "Thai"
+        },
+        {
+            "name": "Dippalace",
+            "description": "Located at The Box. Need to go to the other side of Roppongi-itchome station.",
+            "cuisine": "Thai and Indian"
+        },
+        {
+            "name": "Bistro French Restaurant",
+            "description": "Good steak!",
+            "cuisine": "French"
+        },
+        {
+            "name": "Shake Shack",
+            "description": "American burgers and stuff. Roppongi station.",
+            "cuisine": "American"
+        },
+        {
+            "name": "Frijoles",
+            "description": "Burrito! Need I say more? It's at Roppongi station.",
+            "cuisine": "Tex-Mex"
+        },
+        {
+            "name": "Bubby's",
+            "description": "Pie place at Ark Mori Hills.",
+            "cuisine": "American"
+        },
+        {
+            "name": "Ikinari Steak",
+            "description": "Cost-performance steak just across the street.",
+            "cuisine": "Just meat"
+        },
+        {
+            "name": "The far-away Sushi place",
+            "description": "The expensive sushi place.",
+            "cuisine": "Japanese"
+        }
+    ]
+}

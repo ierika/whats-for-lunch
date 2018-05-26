@@ -4,13 +4,18 @@ block content
     .row.search-wrapper
         .col.s12.m6.offset-m3
             .row
-                .input-field.col.s12
-                    input(type="text")#autocomplete-input.autocomplete
-                    label(for="autocomplete-input") Search
+                form(action="", method="get")#search-form
+                    .input-field.col.s12
+                        input(type="text")#autocomplete-input.autocomplete
+                        label(for="autocomplete-input") Search for restaurants near Shiroyama Hills<i class="material-icons left">search</i>
 
             .row.center-align.my-5
                 .col.s12
-                    a(href="javascript:void(0)")#pick-restaurant.waves-effect.waves-light.btn-large Pick a restaurant
+                    a(href="#modal1").pick-restaurant.waves-effect.waves-light.btn-large.cyan.valign-wrapper.modal-trigger
+                        i.material-icons.left business
+                        | Pick a random restaurant
 
-    .floater-right-bottom
-        <a class="btn-floating btn-large waves-effect waves-light red"><i class="material-icons">add</i></a>
+    #modal1.modal
+        #result.modal-content.center-align
+        .modal-footer
+            a(href="javascript:void(0)").pick-restaurant.waves-effect.waves-light.btn Pick again

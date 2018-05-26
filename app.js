@@ -42,6 +42,7 @@ app.use('/static', express.static('./static'));
 // Boostrap variables
 app.use((req, res, next) => {
     res.locals.config = require('./config');
+    res.locals.BASE_DIR = BASE_DIR;
     next();
 });
 
