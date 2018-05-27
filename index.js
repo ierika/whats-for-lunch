@@ -8,16 +8,22 @@ const routes = require('./routes');
 // const mongoose = require('mongoose');
 const chalk = require('chalk');
 const dotenv = require('dotenv');
+const session = require('express-session');
 
 // Load dotenv
 dotenv.load('./env');
 
 // Constants
-const PORT = process.env.PORT || 3000;
-const DEBUG = process.env.DEBUG || false;
-const BASE_DIR = __dirname;
+const config = {};
+config.PORT = process.env.PORT || 3000;
+config.DEBUG = process.env.DEBUG || false;
+config.BASE_DIR = __dirname;
+config.SITE_NAME = "What's for lunch?";
+config.SLOGAN = "Make up your mind!";
+config.GIPHY_API_KEY = process.env.GIPHY_API_KEY;
 
-// Database
+
+// // Database
 // mongoose.connect(process.env.MONGODB_URI);
 // const db = mongoose.connection;
 // db.on('error', (err) => {
@@ -28,6 +34,13 @@ const BASE_DIR = __dirname;
 //     );
 //     process.exit();
 // });
+
+// Sessions
+app.use(session({
+    secret: process.env.SECRET_KEY,
+    resave: true,
+    saveUninitialized: false,
+}));
 
 // Settings
 app.set('view engine', 'pug');
@@ -41,8 +54,7 @@ app.use('/static', express.static('./static'));
 
 // Boostrap variables
 app.use((req, res, next) => {
-    res.locals.config = require('./config');
-    res.locals.BASE_DIR = BASE_DIR;
+    res.locals.config = config;
     next();
 });
 
@@ -51,12 +63,12 @@ app.use(routes);
 
 // Error handler
 app.use((err, req, res, next) => {
-    res.locals.err = err;
     console.log(err);
+    res.locals.err = err;
     res.status(500);
-    res.render('error', { DEBUG: DEBUG } );
+    res.render('error', { DEBUG: config.DEBUG } );
 });
 
 // Server
-app.listen(PORT);
-console.log(`This app is running at port: ${ PORT }`);
+app.listen(config.PORT);
+console.log(`This app is running at port: ${ config.PORT }`);

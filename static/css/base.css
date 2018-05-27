@@ -2,6 +2,10 @@
   margin-left: auto;
   margin-right: auto; }
 
+.mx-0 {
+  margin-top: 0;
+  margin-bottom: 0; }
+
 .mx-1 {
   margin-top: 1em;
   margin-bottom: 1em; }
@@ -26,6 +30,10 @@
   margin-top: auto;
   margin-bottom: auto; }
 
+.my-0 {
+  margin-top: 0;
+  margin-bottom: 0; }
+
 .my-1 {
   margin-top: 1em;
   margin-bottom: 1em; }
@@ -46,6 +54,9 @@
   margin-top: 5em;
   margin-bottom: 5em; }
 
+.mt-0 {
+  margin-top: 0; }
+
 .mt-1 {
   margin-top: 1em; }
 
@@ -60,6 +71,9 @@
 
 .mt-5 {
   margin-top: 5em; }
+
+.mb-0 {
+  margin-bottom: 0; }
 
 .mb-1 {
   margin-bottom: 1em; }
@@ -90,7 +104,7 @@ nav a:link, nav a:active, nav a:visited, nav a:hover {
   text-decoration: none; }
 
 body {
-  color: #212121;
+  color: #444444;
   display: flex;
   min-height: 100vh;
   flex-direction: column; }
@@ -112,7 +126,16 @@ a.btn-large, a.btn, a.btn-flat {
   color: #fafafa; }
 
 .text-muted {
-  color: #555555; }
+  color: #777777; }
+
+.text-black {
+  color: #444444; }
+
+.text-red {
+  color: #f44336; }
+
+.small {
+  font-size: 0.8em; }
 
 .brand-logo {
   display: block;
@@ -132,22 +155,44 @@ a.btn-large, a.btn, a.btn-flat {
   color: #fafafa; }
 
 footer {
-  position: absolute;
-  bottom: 0px;
-  width: 100%; }
+  margin: 1em auto;
+  width: 100%;
+  color: #777777; }
 
 .search-wrapper {
   margin: 2em auto; }
 
-#result .result-name {
-  color: #00b8d4;
+.restaurant-cuisine {
+  color: #777777;
+  font-size: 1.4em;
+  margin: 0; }
+
+.restaurant-name {
+  color: #2196f3;
   font-weight: bold;
-  font-size: 3em; }
-#result .result-description {
-  color: #212121;
-  font-size: 1.4em; }
-#result .result-cuisine {
-  color: #555555;
-  font-size: 1.4em; }
+  font-size: 3em;
+  margin: 0 0 0.2em; }
+
+.restaurant-description {
+  color: #444444;
+  font-size: 1.4em;
+  margin: 0; }
+
+.giphy {
+  max-width: 500px;
+  width: 100%;
+  border: 1px solid #cccccc; }
+
+.disclaimer {
+  font-size: 0.8em;
+  text-align: center;
+  line-height: 0.2em;
+  color: #cccccc; }
+
+.gravatar {
+  border-radius: 100%;
+  max-width: 200px;
+  min-width: 200px;
+  border: 2px solid #cccccc; }
 
 /*# sourceMappingURL=base.css.map */

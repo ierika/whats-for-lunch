@@ -2,10 +2,10 @@
   "name": "whats_for_lunch",
   "version": "1.0.0",
   "description": "To help us pick what's for lunch.",
-  "main": "app.js",
+  "main": "index.js",
   "scripts": {
     "test": "which node || exit 1",
-    "start": "node app.js"
+    "start": "node index.js"
   },
   "keywords": [
     "node.js",
@@ -15,11 +15,14 @@
   "author": "haloerika@gmail.com",
   "license": "ISC",
   "dependencies": {
+    "bcrypt": "^2.0.1",
     "body-parser": "^1.18.3",
     "chalk": "^2.4.1",
     "dotenv": "^5.0.1",
     "express": "^4.16.3",
+    "express-session": "^1.15.6",
     "mongoose": "^5.1.2",
-    "pug": "^2.0.3"
+    "pug": "^2.0.3",
+    "request": "^2.87.0"
   }
 }

@@ -1,5 +1,13 @@
 if restaurant.cuisine
-    p.result-cuisine= restaurant.cuisine
-h3.result-name= restaurant.name
+    p.restaurant-cuisine= restaurant.cuisine
+h3.restaurant-name.text-red= restaurant.name
 if restaurant.description
-    p.result-description= restaurant.description
+    p.restaurant-description= restaurant.description
+
+.my-1 &nbsp;
+
+if restaurant.cuisine
+    div
+        img(src="/static/img/giphy.png", width="120")
+        img(src=giphyUrl).giphy.mb-3
+    

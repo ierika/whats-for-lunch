@@ -3,19 +3,19 @@ extends base
 block content
     .row.search-wrapper
         .col.s12.m6.offset-m3
-            .row
-                form(action="", method="get")#search-form
-                    .input-field.col.s12
-                        input(type="text")#autocomplete-input.autocomplete
-                        label(for="autocomplete-input") Search for restaurants near Shiroyama Hills<i class="material-icons left">search</i>
+            //- .row
+            //-     form(action="", method="get")#search-form
+            //-         .input-field.col.s12
+            //-             input(type="text")#autocomplete-input.autocomplete
+            //-             label(for="autocomplete-input") Search for restaurants near Shiroyama Hills<i class="material-icons left">search</i>
 
-            .row.center-align.my-5
-                .col.s12
-                    a(href="#modal1").pick-restaurant.waves-effect.waves-light.btn-large.cyan.valign-wrapper.modal-trigger
-                        i.material-icons.left business
-                        | Pick a random restaurant
+    .row.center-align.mb-5
+        .col.s12
+            a(href="javascript:void(0)").pick-restaurant.waves-effect.waves-light.btn-large.blue.valign-wrapper.modal-trigger
+                i.material-icons.left business
+                | Pick a random restaurant
 
-    #modal1.modal
-        #result.modal-content.center-align
-        .modal-footer
-            a(href="javascript:void(0)").pick-restaurant.waves-effect.waves-light.btn Pick again
+        
+        #result.center-align.col.m8.offset-m2.s12.restaurant.mt-3
+
+    .spacer.my-5 &nbsp;
