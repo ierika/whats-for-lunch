@@ -1,13 +1,13 @@
 {
     "restaurants": [
         {
-            "name": "Wako",
-            "description": "Tonkatsu place",
+            "name": "Tonkatsu Wako",
+            "description": "Go here if you want to get stuffed, 'cuz they have all-you-can-eat shredded cabbage, miso soup, and rice.",
             "cuisine": "Japanese"
         },
         {
             "name": "Pizzeria Peppe",
-            "description": "Best Italian place in the area.",
+            "description": "Music is a little loud but it's the best Italian here so far.",
             "cuisine": "Italian"
         },
         {
@@ -17,27 +17,27 @@
         },
         {
             "name": "Taco Rico",
-            "description": "Burrito!",
+            "description": "One word. Burrito!",
             "cuisine": "Tex-Mex"
         },
         {
             "name": "Maguro Dake",
-            "description": "Best tuna bowl in the area!",
+            "description": "Best tuna bowl in the area! They only have tuna in the menu.",
             "cuisine": "Japanese"
         },
         {
             "name": "French up the hill",
-            "description": "Butter!",
+            "description": "Go here if you like butter, like lots of it! Super tender pork! Lamb chops! Oven-baked chicken!",
             "cuisine": "French"
         },
         {
             "name": "Balcony",
-            "description": "Cost-performance French place. Probably the best French here.",
+            "description": "Cost-performance French place. Probably the best French here. Everything here is delicious, down to the coffee and baguette.",
             "cuisine": "French"
         },
         {
             "name": "Green Brothers",
-            "description": "Salad place located at the building next to us.",
+            "description": "Salad place located at the building next to us. You have more dressing options here.",
             "cuisine": "Hippie Meal"
         },
         {
@@ -52,6 +52,7 @@
         },
         {
             "name": "Indian buffet at Izumi Tower",
+            "description": "They sometimes have all-you-can-eat butter chicken curry and tandoori chicken.",
             "cuisine": "Indian"
         },
         {
@@ -76,7 +77,7 @@
         },
         {
             "name": "Bistro French Restaurant",
-            "description": "Good steak!",
+            "description": "Delicious steak and yummy moist bread.",
             "cuisine": "French"
         },
         {
@@ -96,13 +97,23 @@
         },
         {
             "name": "Ikinari Steak",
-            "description": "Cost-performance steak just across the street.",
+            "description": "Cost-performance steak. Located in front Kamiyacho exit.",
             "cuisine": "Just meat"
         },
         {
             "name": "The far-away Sushi place",
             "description": "The expensive sushi place.",
             "cuisine": "Japanese"
+        },
+        {
+            "name": "Food truck",
+            "description": "Not bad! Some are actually delicious.",
+            "cuisine": "All cuisine"
+        },
+        {
+            "name": "Korean Bibimbap Place",
+            "description": "Delicious bibimbap. You're going to have to cross Roppongi-itchome station though.",
+            "cuisine": "Korean"
         }
     ]
 }

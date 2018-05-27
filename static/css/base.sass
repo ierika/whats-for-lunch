@@ -5,10 +5,12 @@
 
 $white: #fafafa
 $lightBlue: #bbdefb
-$gray: #555555
-$textColor: #212121
+$gray: #777777
+$textColor: #444444
 $cyan: #00b8d4
 $pink: #ec407a
+$red: #f44336
+$blue: #2196f3
 
 
 // TYPOGRAPHY
@@ -46,6 +48,14 @@ a
 .text-muted
     color: $gray
 
+.text-black
+    color: $textColor
+
+.text-red
+    color: $red
+
+.small
+    font-size: 0.8em
 
 
 // HEADER
@@ -70,9 +80,10 @@ a
 
 // page footer
 footer
-    position: absolute
-    bottom: 0px
+    margin: 1em auto
     width: 100%
+    color: $gray
+
 
 
 // search
@@ -83,17 +94,36 @@ footer
 
 // index
 
-#result
+.restaurant-cuisine
+    color: $gray
+    font-size: 1.4em
+    margin: 0
 
-    .result-name
-        color: $cyan
-        font-weight: bold
-        font-size: 3em
+.restaurant-name
+    color: $blue
+    font-weight: bold
+    font-size: 3em
+    margin: 0 0 0.2em
 
-    .result-description
-        color: $textColor
-        font-size: 1.4em
+.restaurant-description
+    color: $textColor
+    font-size: 1.4em
+    margin: 0
 
-    .result-cuisine
-        color: $gray
-        font-size: 1.4em
+.giphy
+    max-width: 500px
+    width: 100%
+    border: 1px solid #cccccc
+
+.disclaimer
+    font-size: 0.8em
+    text-align: center
+    line-height: 0.2em
+    color: #cccccc
+
+// profile page
+.gravatar
+    border-radius: 100%
+    max-width: 200px
+    min-width: 200px
+    border: 2px solid #cccccc

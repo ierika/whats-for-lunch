@@ -10,26 +10,35 @@ html
 
     body
         .navbar-fixed
-            nav.pink.lighten-1
+            nav.red
                 .nav-wrapper
                     a(href="/").brand-logo
                         h1.hide= config.SITE_NAME
                         h5.brand-text &nbsp;#{config.SITE_NAME}&nbsp
                             br
                             span.slogan.hide-on-small-only= config.SLOGAN
-                    // ul#nav.mobile.right.hide-on-med-and-down
-                    //     li
-                    //         a(href="/") Home
+                    ul#nav.mobile.right.hide-on-med-and-down
+                        li
+                            a(href="/") Home
+                        li
+                            a(href="/signup") Sign up
+                        li
+                            a(href="/profile") Profile
 
         .container
             .col.s12
                 block content
 
-    footer.page-footer.cyan.accent-4
-        .footer-copyright
-            .container= `© 2018 What's for lunch`
-                span.right Made in Node.js with love by 
-                    a(href="https://github.com/iErika", target="_blank" style="color: #fafafa;") Erika Suzuki
+    footer
+        .container.center-align
+            | © 2018 What's for lunch
+            br
+            span
+                | Made in Node.js with love by 
+                a(href="https://github.com/iErika", target="_blank").text-muted Erika Suzuki
+            br
+            span.text-muted.disclaimer.
+                Disclaimer: This is just a toy application for learning purposes.
                     
     script(src="/static/vendor/js/jquery-3.3.1.min.js")
     script(src="/static/vendor/js/materialize.min.js")
