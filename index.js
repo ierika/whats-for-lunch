@@ -8,6 +8,7 @@ const routes = require('./routes');
 // const mongoose = require('mongoose');
 const chalk = require('chalk');
 const dotenv = require('dotenv');
+const session = require('express-session');
 
 // Load dotenv
 dotenv.load('./env');
@@ -33,6 +34,13 @@ config.GIPHY_API_KEY = process.env.GIPHY_API_KEY;
 //     );
 //     process.exit();
 // });
+
+// Sessions
+app.use(session({
+    secret: process.env.SECRET_KEY,
+    resave: true,
+    saveUninitialized: false,
+}));
 
 // Settings
 app.set('view engine', 'pug');

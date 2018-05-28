@@ -27,21 +27,15 @@ $(document).ready(function(){
 
     // Pick restaurant button
     $('.pick-restaurant').click(function () {
-        $.ajax({
-            type: 'GET',
-            url: '/pick',
-            success: function(data) {
-                const $result = $("#result");
-                $result.html(`
-                    <div class="progress blue lighten-4" style="margin-top: 5em;">
-                        <div class="indeterminate blue"></div>
-                    </div>
-                `);
-                setTimeout(() => {
-                    $result.html(data);
-                }, 1000);
-            },
-        });
+        const $result = $("#result");
+        $result.html(`
+            <div class="progress blue lighten-4" style="margin-top: 5em;">
+                <div class="indeterminate blue"></div>
+            </div>
+        `);
+        setTimeout(() => {
+            $result.load('/pick');
+        }, 500);
     });
 
 
