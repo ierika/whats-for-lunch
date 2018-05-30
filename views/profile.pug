@@ -8,18 +8,18 @@ block content
     form(action="/profile/update", method="POST")#registerForm.mt-2
     .row
         .col.m8.offset-m2
-            h3.center-align.mb-1 Erika Suzuki
+            h3.center-align.mb-1 #{user.firstName} #{user.lastName}
             .row
                 .input-field.col.m6.s12
-                    input(type="text", name="firstName", value="Erika")
+                    input(type="text", name="firstName", value=user.firstName)
                     label(for="firstName") First name
 
                 .input-field.col.m6.s12
-                    input(type="text", name="lastName", value="Suzuki")
+                    input(type="text", name="lastName", value=user.lastName)
                     label(for="lastName") Last name
 
                 .input-field.col.s12
-                    p name@domain.com
+                    p= user.email
 
 
             .row

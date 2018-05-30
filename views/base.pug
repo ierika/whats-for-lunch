@@ -3,10 +3,16 @@ html
     head
         meta(charset="utf-8")
         meta(name="viewport", content="width=device-width, initial-scale=1, shrink-to-fit=no")
+        block head_meta
+
         title= config.SITE_NAME
+
         link(href="/static/css/base.css" rel="stylesheet")
         link(href="/static/vendor/css/materialize.min.css" rel="stylesheet")
         link(href="https://fonts.googleapis.com/icon?family=Material+Icons", rel="stylesheet")
+        block head_link
+        
+        block head_script
 
     body
         .navbar-fixed
@@ -20,18 +26,23 @@ html
                     ul#nav.mobile.right.hide-on-med-and-down
                         li
                             a(href="/") Home
-                        li
-                            a(href="/signup") Sign up
-                        li
-                            a(href="/profile") Profile
+                        if currentUser
+                            li
+                                a(href="/profile") Profile
+                            li
+                                a(href="/logout") Logout
+                        else
+                            li
+                                a(href="/login") Login
+                            li
+                                a(href="/signup") Signup
 
         .container
             .col.s12
                 block content
 
     footer
-        .container.center-align
-            | © 2018 What's for lunch
+        .container.center-align= `© 2018 What's for lunch`
             br
             span
                 | Made in Node.js with love by 

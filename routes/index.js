@@ -1,14 +1,15 @@
 const routes = require('express').Router();
 const http = require('http');
 const request = require('request');
+const middleware = require('../middleware');
 
 
-routes.get('', (req, res) => {
+routes.get('(/|/index)', (req, res, next) => {
     res.render('index');
 });
 
 
-routes.use('', require('./user_routes'));
+routes.use('', require('./user'));
 
 
 routes.get('/pick', (req, res) => {
@@ -35,7 +36,9 @@ routes.get('/pick', (req, res) => {
                 'korean': 'https://media.giphy.com/media/xUPJPhnAzy86MR7WmI/giphy.gif',
                 'hippie meal': 'https://media.giphy.com/media/d1FL4zXfIQZMWFQQ/giphy.gif',
             }
+
             const key = restaurant.cuisine.toLowerCase();
+            
             let giphyUrl;
             if (key in gifs) {
                 giphyUrl = gifs[key];

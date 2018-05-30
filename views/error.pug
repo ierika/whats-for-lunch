@@ -1,17 +1,18 @@
 extends base
 
 block content
-    .text-center
-        h1.text-red
-            i(style="font-size: 1em;").valign-middle.material-icons.left error
-            | #{err.message}
+    .center-align
+        
+        p.mb-0.mt-2
+            i(style="font-size: 5em;").valign-middle.material-icons.text-red error
+        h3.my-0.text-red= err.message
         if err.status
-            h3 Status #{err.status}
-        if DEBUG
-            .text-left.my-5
-                pre= err.stack
-        if err.goBackUrl
-            .row
-                .col.s12.center-align
-                    a(onclick="history.back()").btn.red Go back
-                        i.material-icons.left chevron_left
+            h5 Status #{err.status}
+
+    if config.DEBUG
+        .code-block.left-align.my-5(style="overflow-x: scroll")
+            pre= err.stack
+
+    .center-align.mb-5.mt-2
+        a(onclick="history.back()").btn.red Go back
+            i.material-icons.left chevron_left
