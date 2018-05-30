@@ -4,7 +4,7 @@ const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
 const routes = require('./routes');
-const mongoose = require('mongoose');
+// const mongoose = require('mongoose');
 const chalk = require('chalk');
 const dotenv = require('dotenv');
 const session = require('express-session');
@@ -33,17 +33,17 @@ const config = {
 };
 
 
-// Database
-mongoose.connect(process.env.MONGODB_URI);
-const db = mongoose.connection;
-db.on('error', (err) => {
-    console.error(err);
-    console.log(
-        '%s MongoDB connection error. Please make sure MongoDB is running.',
-        chalk.red('✗')
-    );
-    process.exit();
-});
+// // Database
+// mongoose.connect(process.env.MONGODB_URI);
+// const db = mongoose.connection;
+// db.on('error', (err) => {
+//     console.error(err);
+//     console.log(
+//         '%s MongoDB connection error. Please make sure MongoDB is running.',
+//         chalk.red('✗')
+//     );
+//     process.exit();
+// });
 
 
 // Sessions
