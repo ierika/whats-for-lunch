@@ -1,0 +1,17 @@
+extends base
+
+block content
+    .row
+        .col.s12.m8.offset-m2
+            form(action="", method="POST", id="LoginForm").mt-3
+                .input-field.col.s12
+                    input(type="text", name="email")
+                    label(for="email") Email address
+                        i.material-icons.left email
+                .input-field.col.s12
+                    input(type="password", name="password")
+                    label(for="password") Password
+                        i.material-icons.left lock
+                .center-align
+                    button(type="submit").btn.blue.my-3 Login
+                        i.material-icons.right send
