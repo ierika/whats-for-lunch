@@ -1,31 +1,4 @@
 $(document).ready(function(){
-    // Search
-    const autocompleteData = {};
-
-    let restaurants = (function(){
-        $.ajax({
-            type: 'GET',
-            url: '/static/restaurants.json',
-            success: function(data) {
-                restaurants = data;
-                console.log(restaurants);
-                for (restaurant of restaurants) {
-                    autocompleteData[restaurant.name] = null;
-                }
-            },
-        });
-    })();
-
-    $('input.autocomplete').autocomplete({
-      data: autocompleteData,
-    });
-
-    $('#search-form').submit(function(e) {
-        e.preventDefault();
-        alert('Search is not working yet');
-    });
-
-
     // Pick restaurant button
     $('.pick-restaurant').click(function () {
         const $result = $("#result");

@@ -80,13 +80,12 @@ app.use(routes);
 app.use((err, req, res, next) => {
     const error = new Error(`Page not found.`);
     error.status = 404;
-    next(error);
+    next(err);
 });
 
 // Error handler
 app.use((err, req, res, next) => {
     res.status(err.status || 500);
-
     res.render('error', {
         err: err,
         DEBUG: config.DEBUG,

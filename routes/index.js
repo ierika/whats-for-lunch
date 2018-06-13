@@ -1,16 +1,16 @@
 const routes = require('express').Router();
 const http = require('http');
 const middleware = require('../middleware');
-const Restaurant = require('../models/restaurant');
+// const Restaurant = require('../models/restaurant');
 const User = require('../models/user');
 
 
-routes.get('/', (req, res, next) => {
+routes.get('/', (req, res) => {
     res.render('index');
 });
 
 
-routes.get('/pick', (req, res, next) => {
+routes.get('/pick', (req, res) => {
     // Restaurant.find({}, (error, restaurant) => {
     //     console.log(restaurant);
     //     res.end(error);
@@ -38,7 +38,7 @@ routes.get('/pick', (req, res, next) => {
                 'tex-mex': 'https://media.giphy.com/media/OGxUX25qMNyRG/giphy.gif',
                 'korean': 'https://media.giphy.com/media/xUPJPhnAzy86MR7WmI/giphy.gif',
                 'hippie meal': 'https://media.giphy.com/media/d1FL4zXfIQZMWFQQ/giphy.gif',
-            }
+            };
 
             const key = restaurant.cuisine.toLowerCase();
             
@@ -119,6 +119,7 @@ routes.post('/signup', (req, res, next) => {
         // Create user object and save to database
         User.create(req.body, (err, user) => {
             if (err) return next(err);
+            console.log(user);
             console.log('User created');
             res.redirect('./profile');
         })
