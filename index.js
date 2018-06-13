@@ -4,10 +4,14 @@ const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
 const routes = require('./routes');
-// const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 const session = require('express-session');
+const logger = require('morgan');
+// const mongoose = require('mongoose');
 
+
+// Logger
+app.use(logger('dev'));
 
 // Load dotenv
 dotenv.load('./env');
