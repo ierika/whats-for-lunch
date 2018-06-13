@@ -79,7 +79,7 @@ app.use(routes);
 // Return a 404 error if a route wasn't matched.
 app.use((err, req, res, next) => {
     const error = new Error(`Page not found.`);
-    error.status = 400;
+    error.status = 404;
     next(error);
 });
 
