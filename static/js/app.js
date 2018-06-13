@@ -7,7 +7,8 @@ $(document).ready(function(){
             type: 'GET',
             url: '/static/restaurants.json',
             success: function(data) {
-                restaurants = data.restaurants;
+                restaurants = data;
+                console.log(restaurants);
                 for (restaurant of restaurants) {
                     autocompleteData[restaurant.name] = null;
                 }
