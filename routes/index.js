@@ -1,11 +1,8 @@
 const routes = require('express').Router();
 const http = require('http');
-const request = require('request');
 const middleware = require('../middleware');
 const Restaurant = require('../models/restaurant');
-
-
-routes.use('', require('./user'));
+const User = require('../models/user');
 
 
 routes.get('/', (req, res, next) => {
@@ -24,7 +21,6 @@ routes.get('/pick', (req, res, next) => {
         resp.on('data', chunk => data += chunk);
         resp.on('end', () => {
             const restaurants = JSON.parse(data);
-            console.log(restaurants);
             const randInt = Math.floor((Math.random()*restaurants.length));
             const restaurant = restaurants[randInt];
             console.log(restaurant);
@@ -57,6 +53,91 @@ routes.get('/pick', (req, res, next) => {
             res.render('partials/restaurant', { restaurant, giphyUrl });
         });
     });
+});
+
+
+// GET /login
+routes.get('/login', (req, res) => {
+    console.log('login');
+    if (req.session.userId) {
+        res.redirect('/profile');
+    }
+    res.render('login');
+});
+
+
+// POST /login
+routes.post('/login', (req, res, next) => {
+    if ( !(req.body.email && req.body.password) ) {
+        const err = new Error('Both email and password fields are required');
+        err.status = 400;
+        return next(err);
+    }
+
+    User.authenticate(req.body.email, req.body.password, (err, user) => {
+        if (err) return next(err);
+        if (user) console.log('User authenticated');
+        req.session.userId = user._id;
+        const nextUrl = req.query.next || '/';
+        res.redirect(nextUrl);
+    });
+});
+
+
+// GET /logout
+routes.get('/logout', (req, res) => {
+    req.session.destroy();
+    res.redirect('/login');
+});
+
+
+routes.get('/signup', (req, res, next) => {
+    if (res.locals.currentUser) {
+        const err = new Error("You're already registered.");
+        err.status = 400;
+        return next(err);
+    }
+    res.render('signup');
+});
+
+
+routes.post('/signup', (req, res, next) => {
+    console.log("signup poist");
+    if (req.body.firstName
+        && req.body.lastName
+        && req.body.email
+        && req.body.password
+        && req.body.verifyPassword) {
+
+        // Check if the passwords match
+        if (req.body.password !== req.body.verifyPassword) {
+            let err = new Error('Password\'s do not match!');
+            err.status = 400;
+            return next(err);
+        }
+
+        // Create user object and save to database
+        User.create(req.body, (err, user) => {
+            if (err) return next(err);
+            console.log('User created');
+            res.redirect('./profile');
+        })
+    } else {
+        const err = new Error('All fields are required');
+        err.status = 400;
+        err.goBackUrl = '/signup';
+        return next(err);
+    }
+});
+
+
+routes.get('/profile', middleware.requireLogin, (req, res, next) => {
+    const userId = req.session.userId;
+    User.findById(userId)
+        .exec(function(err, user) {
+            if (err) return next(err);
+            res.render('profile', { user });
+        });
 });
 
 
