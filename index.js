@@ -4,10 +4,11 @@ const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
 const routes = require('./routes');
+const chalk = require('chalk');
 const dotenv = require('dotenv');
 const session = require('express-session');
 const logger = require('morgan');
-// const mongoose = require('mongoose');
+const mongoose = require('mongoose');
 
 
 // Logger
@@ -31,17 +32,17 @@ const config = {
 };
 
 
-// // Database
-// mongoose.connect(process.env.MONGODB_URI);
-// const db = mongoose.connection;
-// db.on('error', (err) => {
-//     console.error(err);
-//     console.log(
-//         '%s MongoDB connection error. Please make sure MongoDB is running.',
-//         chalk.red('✗')
-//     );
-//     process.exit();
-// });
+// Database
+mongoose.connect(process.env.MONGODB_URI);
+const db = mongoose.connection;
+db.on('error', (err) => {
+    console.log(
+        '%s MongoDB connection error. Please make sure MongoDB is running.',
+        err.message,
+        chalk.red('✗')
+    );
+    process.exit();
+});
 
 
 // Sessions
@@ -65,7 +66,7 @@ app.use(bodyParser.json());
 app.use('/static', express.static('./static'));
 
 
-// Boostrap variables to template
+// Bootstrap variables to template
 app.use((req, res, next) => {
     res.locals.currentUser = req.session.userId;
     res.locals.config = config;
@@ -76,12 +77,14 @@ app.use((req, res, next) => {
 // Routes
 app.use(routes);
 
+
 // Return a 404 error if a route wasn't matched.
 app.use((err, req, res, next) => {
     const error = new Error(`Page not found.`);
     error.status = 404;
     next(err);
 });
+
 
 // Error handler
 app.use((err, req, res, next) => {
@@ -94,5 +97,10 @@ app.use((err, req, res, next) => {
 
 
 // Server
-app.listen(config.PORT);
-console.log(`This app is running at port: ${ config.PORT }`);
+app.listen(config.PORT, err => {
+    if (err) {
+        console.error(err.message);
+        process.exit(1);
+    }
+    console.log(`This app is running at port: ${ config.PORT }`);
+});

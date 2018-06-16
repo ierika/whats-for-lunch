@@ -1,28 +1,26 @@
 const routes = require('express').Router();
 const http = require('http');
 const middleware = require('../middleware');
-// const Restaurant = require('../models/restaurant');
+const Restaurant = require('../models/restaurant');
 const User = require('../models/user');
 
 
+// The top page
 routes.get('/', (req, res) => {
     res.render('index');
 });
 
 
-routes.get('/pick', (req, res) => {
-    // Restaurant.find({}, (error, restaurant) => {
-    //     console.log(restaurant);
-    //     res.end(error);
-    // });
+// Picks a random restaurant from the database
+routes.get('/pick', (req, res, next) => {
+    Restaurant.count().exec((err, count) => {
+        if (err) return next(err);
 
-    http.get(`http://${req.get('Host')}/static/restaurants.json`, resp => {
-        let data = '';
-        resp.on('data', chunk => data += chunk);
-        resp.on('end', () => {
-            const restaurants = JSON.parse(data);
-            const randInt = Math.floor((Math.random()*restaurants.length));
-            const restaurant = restaurants[randInt];
+        const random = Math.floor(Math.random() * count);
+
+        Restaurant.findOne({}).skip(random).exec((err, restaurant) => {
+            if (err) return next(err);
+
             console.log(restaurant);
 
             // Pick a gif
@@ -41,7 +39,7 @@ routes.get('/pick', (req, res) => {
             };
 
             const key = restaurant.cuisine.toLowerCase();
-            
+
             let giphyUrl;
             if (key in gifs) {
                 giphyUrl = gifs[key];
@@ -102,7 +100,6 @@ routes.get('/signup', (req, res, next) => {
 
 
 routes.post('/signup', (req, res, next) => {
-    console.log("signup poist");
     if (req.body.firstName
         && req.body.lastName
         && req.body.email
@@ -111,7 +108,7 @@ routes.post('/signup', (req, res, next) => {
 
         // Check if the passwords match
         if (req.body.password !== req.body.verifyPassword) {
-            let err = new Error('Password\'s do not match!');
+            const err = new Error('Password\'s do not match!');
             err.status = 400;
             return next(err);
         }
