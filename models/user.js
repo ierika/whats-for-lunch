@@ -39,7 +39,7 @@ const UserSchema = new mongoose.Schema({
 
 
 /*
- * Methods
+ * Statics
  */
 UserSchema.statics.authenticate = function(email, password, callback) {
     console.log('Authenticating user...');
@@ -50,8 +50,8 @@ UserSchema.statics.authenticate = function(email, password, callback) {
 
             // Return error if no user was found.
             if ( !user ) {
-                var err = new Error('User not found.');
-                err.status = 401
+                const err = new Error('User not found.');
+                err.status = 401;
                 return callback(err);
             }
 
@@ -69,13 +69,13 @@ UserSchema.statics.authenticate = function(email, password, callback) {
 };
 
 
-/*
- * Hooks
- */
+// Checks if the user is authenticated
+UserSchema.statics.isAuthenticated = function(req) {
+    return req.session.userId || false;
+};
+
 
 // Hash password
-// In order for `this` to work properly,
-// We must not use arrow functions.
 UserSchema.pre('save', function(next) {
     const user = this;
     bcrypt.hash(user.password, 10, (err, hash) => {
@@ -89,7 +89,8 @@ UserSchema.pre('save', function(next) {
 // Update `update` field on update
 UserSchema.pre('update', function(next) {
     const user = this;
-    user.update = Date.now();
+    user.update = Date.now;
+    next();
 });
 
 

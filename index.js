@@ -1,15 +1,18 @@
 'use strict';
-// Imports
+
 const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
 const routes = require('./routes');
-const mongoose = require('mongoose');
 const chalk = require('chalk');
 const dotenv = require('dotenv');
 const session = require('express-session');
-const middleware = require('./middleware');
+const logger = require('morgan');
+const mongoose = require('mongoose');
 
+
+// Logger
+app.use(logger('dev'));
 
 // Load dotenv
 dotenv.load('./env');
@@ -19,11 +22,7 @@ dotenv.load('./env');
 const config = {
     DEBUG: (() => {
         const debug = process.env.DEBUG.toLowerCase();
-        if (debug === 'true') {
-            return true;
-        } else {
-            return false;
-        }
+        if (debug === 'true') return true;
     })(),
     PORT: process.env.PORT,
     BASE_DIR: __dirname,
@@ -37,9 +36,9 @@ const config = {
 mongoose.connect(process.env.MONGODB_URI);
 const db = mongoose.connection;
 db.on('error', (err) => {
-    console.error(err);
     console.log(
         '%s MongoDB connection error. Please make sure MongoDB is running.',
+        err.message,
         chalk.red('✗')
     );
     process.exit();
@@ -67,7 +66,7 @@ app.use(bodyParser.json());
 app.use('/static', express.static('./static'));
 
 
-// Boostrap variables to template
+// Bootstrap variables to template
 app.use((req, res, next) => {
     res.locals.currentUser = req.session.userId;
     res.locals.config = config;
@@ -79,17 +78,17 @@ app.use((req, res, next) => {
 app.use(routes);
 
 
+// Return a 404 error if a route wasn't matched.
+app.use((err, req, res, next) => {
+    const error = new Error(`Page not found.`);
+    error.status = 404;
+    next(err);
+});
+
+
 // Error handler
 app.use((err, req, res, next) => {
-    if (!err.message) {
-        err.message = 'Server error'
-    }
-    if (err.status) {
-        res.status(err.status);
-    } else {
-        res.status(500);
-    }
-    
+    res.status(err.status || 500);
     res.render('error', {
         err: err,
         DEBUG: config.DEBUG,
@@ -98,5 +97,10 @@ app.use((err, req, res, next) => {
 
 
 // Server
-app.listen(config.PORT);
-console.log(`This app is running at port: ${ config.PORT }`);
+app.listen(config.PORT, err => {
+    if (err) {
+        console.error(err.message);
+        process.exit(1);
+    }
+    console.log(`This app is running at port: ${ config.PORT }`);
+});
