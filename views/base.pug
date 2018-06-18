@@ -26,16 +26,20 @@ html
                     ul#nav.mobile.right.hide-on-med-and-down
                         li
                             a(href="/") Home
+
+                        li
+                            a(href="/restaurant/list") Restaurants
+
                         if currentUser
                             li
-                                a(href="/profile") Profile
+                                a(href="/user/profile") Profile
                             li
-                                a(href="/logout") Logout
+                                a(href="/user/logout") Logout
                         else
                             li
-                                a(href="/login") Login
+                                a(href="/user/login") Login
                             li
-                                a(href="/signup") Signup
+                                a(href="/user/signup") Signup
 
         .container
             .col.s12

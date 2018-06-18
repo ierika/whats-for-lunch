@@ -3,7 +3,7 @@
 const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
-const routes = require('./routes');
+const router = require('./routes');
 const chalk = require('chalk');
 const dotenv = require('dotenv');
 const session = require('express-session');
@@ -75,7 +75,7 @@ app.use((req, res, next) => {
 
 
 // Routes
-app.use(routes);
+app.use(router);
 
 
 // Return a 404 error if a route wasn't matched.

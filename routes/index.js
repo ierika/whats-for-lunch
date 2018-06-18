@@ -1,18 +1,16 @@
-const routes = require('express').Router();
-const http = require('http');
-const middleware = require('../middleware');
+const router = require('express').Router();
+const userRoute = require('./user');
 const Restaurant = require('../models/restaurant');
-const User = require('../models/user');
 
 
 // The top page
-routes.get('/', (req, res) => {
+router.get('/', (req, res) => {
     res.render('index');
 });
 
 
 // Picks a random restaurant from the database
-routes.get('/pick', (req, res, next) => {
+router.get('/pick', (req, res, next) => {
     Restaurant.count().exec((err, count) => {
         if (err) return next(err);
 
@@ -20,8 +18,6 @@ routes.get('/pick', (req, res, next) => {
 
         Restaurant.findOne({}).skip(random).exec((err, restaurant) => {
             if (err) return next(err);
-
-            console.log(restaurant);
 
             // Pick a gif
             const gifs = {
@@ -54,89 +50,19 @@ routes.get('/pick', (req, res, next) => {
 });
 
 
-// GET /login
-routes.get('/login', (req, res) => {
-    console.log('login');
-    if (req.session.userId) {
-        res.redirect('/profile');
-    }
-    res.render('login');
-});
-
-
-// POST /login
-routes.post('/login', (req, res, next) => {
-    if ( !(req.body.email && req.body.password) ) {
-        const err = new Error('Both email and password fields are required');
-        err.status = 400;
-        return next(err);
-    }
-
-    User.authenticate(req.body.email, req.body.password, (err, user) => {
+// GET /restaurant/list
+// Show restaurant list
+router.get('/restaurant/list', (req, res) => {
+    Restaurant.find({}).sort({ updated: -1 }).exec((err, restaurant_list) => {
         if (err) return next(err);
-        if (user) console.log('User authenticated');
-        req.session.userId = user._id;
-        const nextUrl = req.query.next || '/';
-        res.redirect(nextUrl);
+        res.render('restaurant/list', {
+            restaurant_list: restaurant_list,
+        });
     });
 });
 
 
-// GET /logout
-routes.get('/logout', (req, res) => {
-    req.session.destroy();
-    res.redirect('/login');
-});
+router.use('/user', userRoute);
 
 
-routes.get('/signup', (req, res, next) => {
-    if (res.locals.currentUser) {
-        const err = new Error("You're already registered.");
-        err.status = 400;
-        return next(err);
-    }
-    res.render('signup');
-});
-
-
-routes.post('/signup', (req, res, next) => {
-    if (req.body.firstName
-        && req.body.lastName
-        && req.body.email
-        && req.body.password
-        && req.body.verifyPassword) {
-
-        // Check if the passwords match
-        if (req.body.password !== req.body.verifyPassword) {
-            const err = new Error('Password\'s do not match!');
-            err.status = 400;
-            return next(err);
-        }
-
-        // Create user object and save to database
-        User.create(req.body, (err, user) => {
-            if (err) return next(err);
-            console.log(user);
-            console.log('User created');
-            res.redirect('./profile');
-        })
-    } else {
-        const err = new Error('All fields are required');
-        err.status = 400;
-        err.goBackUrl = '/signup';
-        return next(err);
-    }
-});
-
-
-routes.get('/profile', middleware.requireLogin, (req, res, next) => {
-    const userId = req.session.userId;
-    User.findById(userId)
-        .exec(function(err, user) {
-            if (err) return next(err);
-            res.render('profile', { user });
-        });
-});
-
-
-module.exports = routes;
+module.exports = router;
