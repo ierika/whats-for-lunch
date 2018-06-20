@@ -5,27 +5,27 @@ block content
         .col.s12.center-align.mt-2
             img(src="https://s.gravatar.com/avatar/06c32121112801e78613e055365f5448?s=400").gravatar
 
-    form(action="/profile/update", method="POST")#registerForm.mt-2
-    .row
-        .col.m8.offset-m2
-            h3.center-align.mb-1 #{user.firstName} #{user.lastName}
-            .row
-                .input-field.col.m6.s12
-                    input(type="text", name="firstName", value=user.firstName)
-                    label(for="firstName") First name
+    form(action="", method="POST")#registerForm.mt-2
+        .row
+            .col.m8.offset-m2
+                h3.center-align.mb-1 #{user.firstName} #{user.lastName}
+                .row
+                    .input-field.col.m6.s12
+                        input(type="text", name="firstName", value=user.firstName)
+                        label(for="firstName") First name
 
-                .input-field.col.m6.s12
-                    input(type="text", name="lastName", value=user.lastName)
-                    label(for="lastName") Last name
+                    .input-field.col.m6.s12
+                        input(type="text", name="lastName", value=user.lastName)
+                        label(for="lastName") Last name
 
-                .input-field.col.s12
-                    p= user.email
+                    .input-field.col.s12
+                        p= user.email
 
 
-            .row
-                .col.s12.right-align.
-                    <button class="btn waves-effect waves-light left blue-grey lighten-3" type="button" href="#" onclick="sayHello()">Change password</button>
+                .row
+                    .col.s12.right-align.
+                        <a href="/user/change-password" class="left">Change password</a>
 
-                    <button class="btn waves-effect waves-light blue" type="submit" name="action">
-                        Save <i class="material-icons right">send</i>
-                    </button>
+                        <button class="btn waves-effect waves-light blue" type="submit" name="action">
+                            Save <i class="material-icons right">send</i>
+                        </button>

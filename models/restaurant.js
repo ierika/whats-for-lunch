@@ -49,9 +49,16 @@ RestaurantSchema.statics.findRandom = function (callback) {
 };
 
 
+// Update timestamp
+RestaurantSchema.pre('save', function(next) {
+   this.updated = new Date();
+   next();
+});
+
+
 // Update `update` field on update
 RestaurantSchema.pre('update', function(next) {
-    this.update = new Date();
+    this.updated = new Date();
     next();
 });
 
