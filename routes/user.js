@@ -97,7 +97,10 @@ router.get('/profile', requireLogin, (req, res, next) => {
 router.post('/profile', requireLogin, (req, res, next) => {
     User.findById(req.session.userId, (err, user) => {
         if (err) return next(err);
-        user.set(req.body);
+        user.set({
+            firstName: req.body.firstName,
+            lastName: req.body.lastName,
+        });
         user.save((err, user) => {
             if (err) return next(err);
             res.redirect(req.originalUrl);
