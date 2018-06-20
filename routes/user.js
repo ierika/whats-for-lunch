@@ -94,4 +94,35 @@ router.get('/profile', middleware.requireLogin, (req, res, next) => {
 });
 
 
+router.get('/change-password', middleware.requireLogin, (req, res, next) => {
+
+});
+
+
+router.post('/change-password', middleware.requireLogin, (req, res, next) => {
+    User.findById(req.session.userId, (err, user) => {
+        if (err) return next(err);
+
+        if (req.body.password && req.body.verifyPassword) {
+            // If passwords do not match
+            if (req.body.password !== req.body.verifyPassword) {
+                const err = new Error('Passwords do not match!');
+                err.status = 400;
+                return next(err);
+            }
+
+            user.set({ password: req.body.password });
+            user.save((err, updatedUser) => {
+                if (err) return next(err);
+
+            });
+        } else {
+            const err = new Error('All fields are required!');
+            err.status = 400;
+            return next(err);
+        }
+    });
+});
+
+
 module.exports = router;
