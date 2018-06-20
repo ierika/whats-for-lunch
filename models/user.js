@@ -81,6 +81,7 @@ UserSchema.pre('save', function(next) {
     bcrypt.hash(user.password, 10, (err, hash) => {
         if (err) return next(err);
         user.password = hash;
+        user.updated = new Date();
         next();
     });
 });
@@ -89,7 +90,7 @@ UserSchema.pre('save', function(next) {
 // Update `update` field on update
 UserSchema.pre('update', function(next) {
     const user = this;
-    user.update = Date.now;
+    user.updated = new Date();
     next();
 });
 

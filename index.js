@@ -68,6 +68,7 @@ app.use('/static', express.static('./static'));
 
 // Bootstrap variables to template
 app.use((req, res, next) => {
+    res.locals.referer = req.header('Referer') || '';
     res.locals.currentUser = req.session.userId;
     res.locals.config = config;
     next();

@@ -103,13 +103,7 @@ router.get('/:id', requireLogin, (req, res, next) => {
 // Update an existing restaurant record
 router.post('/:id', (req, res) => {
     Restaurant.findById(req.params.id, (err, restaurant) => {
-        const updatedRestaurantBody = {
-            ...req.body,
-            updated: new Date()
-        };
-
-        restaurant.set(updatedRestaurantBody);
-
+        restaurant.set(req.body);
         restaurant.save((err, restaurant) => {
             if (err) return next(err);
             res.status(200);
