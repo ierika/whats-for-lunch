@@ -15,6 +15,14 @@ block content
                 tr
                     td(width="20%")= restaurant.name
                     td(width="20%")= restaurant.cuisine
-                    td= restaurant.description
-                    td(width="10%")
-                        a(href="#") Edit
+                    td(width="40%")= restaurant.description
+                    td(width="15%")
+                        a(href=`/restaurant/${restaurant.id}`) Edit
+                        | &nbsp;|&nbsp;
+                        form(action=`/restaurant/${restaurant.id}/delete`, method="POST", style="display: inline")
+                            a(href='javascript:void(0)').delete-btn.red-text Delete
+
+
+    .fixed-action-btn
+        a(href="/restaurant/add" title="Add a restaurant").btn-floating.btn-large.red.pulse
+            i.material-icons.large add

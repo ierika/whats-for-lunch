@@ -1,0 +1,34 @@
+extends ../base
+
+block content
+    .row
+        .col.s12.m6.offset-m3.mb-4
+            if restaurant
+                h3 Update restaurant information
+            else
+                h3 Add a restaurant
+
+            if restaurant
+                - var url = `/restaurant/${restaurant._id}`;
+            else
+                - var url = '/restaurant/add';
+
+            form(action=url, method="POST").mt-3
+                .input-field.col.s12
+                    input(type="text", name="name", value=`${ restaurant && restaurant.name || '' }`)
+                    label(for="name") Restaurant name
+                        i.material-icons.left business
+
+                .input-field.col.s12
+                    input(type="text", name="cuisine", value=`${ restaurant && restaurant.cuisine || '' }`)
+                    label(for="cuisine") Type of cuisine
+
+                .input-field.col.s12
+                    textarea(name="description", placeholder="Enter description here").materialize-textarea
+                        = `${ restaurant && restaurant.description || '' }`
+
+                .input-field.col.s12.center-align
+                    a(href="/restaurant/list").left.btn.blue-grey.lighten-5.black-text Back
+                        i.material-icons.left chevron_left
+                    button(type="submit").btn.green.right Submit
+                        i.material-icons.right send

@@ -8,7 +8,7 @@ router.get('/login', (req, res) => {
     if (req.session.userId) {
         res.redirect('/user/profile');
     }
-    res.render('login');
+    res.render('user/login');
 });
 
 
@@ -41,7 +41,7 @@ router.get('/signup', (req, res) => {
     if (res.locals.currentUser) {
         res.redirect('/user/profile');
     }
-    res.render('signup');
+    res.render('user/signup');
 });
 
 
@@ -89,7 +89,7 @@ router.get('/profile', middleware.requireLogin, (req, res, next) => {
     User.findById(userId)
         .exec(function(err, user) {
             if (err) return next(err);
-            res.render('profile', { user });
+            res.render('user/profile', { user });
         });
 });
 

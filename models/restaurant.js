@@ -51,9 +51,9 @@ RestaurantSchema.statics.findRandom = function (callback) {
 
 // Update `update` field on update
 RestaurantSchema.pre('update', function(next) {
-    const restaurant = this;
-    restaurant.update = Date.now;
+    this.update = new Date();
     next();
 });
+
 
 module.exports = Restaurant;

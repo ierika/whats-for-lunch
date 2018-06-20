@@ -8,9 +8,18 @@ $(document).ready(function(){
             </div>
         `);
 
-        $result.load('/pick');
+        $result.load('/restaurant/pick');
     });
 
-    // Materialize Modal
+    // Delete button
+    $('.delete-btn').click(function(e) {
+        e.preventDefault();
+        const $form = $(this).closest('form');
+        const confirmation = confirm('Are you sure?');
+        if (confirmation) $form.submit();
+    });
+
+    // Materialize
     $('.modal').modal();
+    $('.fixed-action-btn').floatingActionButton();
 });
