@@ -4,6 +4,7 @@ const requireLogin = require('../middleware').requireLogin;
 
 
 // GET /login
+// Show login form
 router.get('/login', (req, res) => {
     if (req.session.userId) {
         res.redirect('/user/profile');
@@ -13,6 +14,7 @@ router.get('/login', (req, res) => {
 
 
 // POST /login
+// Processes login form and authenticates user
 router.post('/login', (req, res, next) => {
     if ( !(req.body.email && req.body.password) ) {
         const err = new Error('Both email and password fields are required');
@@ -31,12 +33,14 @@ router.post('/login', (req, res, next) => {
 
 
 // GET /logout
+// Logs user out
 router.get('/logout', (req, res) => {
     req.session.destroy();
     res.redirect('/user/login');
 });
 
 
+// Show signup form
 router.get('/signup', (req, res) => {
     if (res.locals.currentUser) {
         res.redirect('/user/profile');
@@ -45,6 +49,7 @@ router.get('/signup', (req, res) => {
 });
 
 
+// Process signup form
 router.post('/signup', (req, res, next) => {
     if (req.body.firstName
         && req.body.lastName
@@ -84,6 +89,7 @@ router.post('/signup', (req, res, next) => {
 });
 
 
+// Show profile
 router.get('/profile', requireLogin, (req, res, next) => {
     const userId = req.session.userId;
     User.findById(userId)
@@ -94,49 +100,47 @@ router.get('/profile', requireLogin, (req, res, next) => {
 });
 
 
+// Update profile
 router.post('/profile', requireLogin, (req, res, next) => {
-    User.findById(req.session.userId, (err, user) => {
+    User.update({ _id: req.session.userId }, { $set: req.body }, (err, user) => {
         if (err) return next(err);
-        user.set({
-            firstName: req.body.firstName,
-            lastName: req.body.lastName,
-        });
-        user.save((err, user) => {
-            if (err) return next(err);
-            res.redirect(req.originalUrl);
-        });
+        res.redirect(req.originalUrl);
     });
 });
 
 
+// Change password form
 router.get('/change-password', requireLogin, (req, res, next) => {
     res.render('user/change-password');
 });
 
 
+// Change password processor
 router.post('/change-password', requireLogin, (req, res, next) => {
-    User.findById(req.session.userId, (err, user) => {
-        if (err) return next(err);
+    if (req.body.password && req.body.verifyPassword) {
+        // If passwords do not match
+        if (req.body.password !== req.body.verifyPassword) {
+            const err = new Error('Passwords do not match!');
+            err.status = 400;
+            return next(err);
+        }
 
-        if (req.body.password && req.body.verifyPassword) {
-            // If passwords do not match
-            if (req.body.password !== req.body.verifyPassword) {
-                const err = new Error('Passwords do not match!');
-                err.status = 400;
-                return next(err);
-            }
-
-            user.set({ password: req.body.password });
-            user.save((err, updatedUser) => {
+        // Update database
+        User.findById(req.session.userId, (err, user) => {
+            if (err) return next(err);
+            user.password = req.body.password;
+            user.save((err, user) => {
                 if (err) return next(err);
                 res.redirect(req.baseUrl + '/profile');
             });
-        } else {
+        });
+    } else {
+        if (err) {
             const err = new Error('All fields are required!');
             err.status = 400;
             return next(err);
         }
-    });
+    }
 });
 
 

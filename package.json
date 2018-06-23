@@ -4,7 +4,7 @@
   "description": "To help us pick what's for lunch.",
   "main": "index.js",
   "scripts": {
-    "test": "mocha",
+    "test": "./node_modules/.bin/mocha",
     "start": "node index.js"
   },
   "keywords": [
@@ -26,8 +26,5 @@
     "pug": "^2.0.3",
     "request": "^2.87.0"
   },
-  "devDependencies": {
-    "chai": "^4.1.2",
-    "mocha": "^5.2.0"
-  }
+  "devDependencies": {}
 }

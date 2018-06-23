@@ -14,6 +14,7 @@ const mongoose = require('mongoose');
 // Logger
 app.use(logger('dev'));
 
+
 // Load dotenv
 dotenv.load('./env');
 
@@ -68,7 +69,7 @@ app.use('/static', express.static('./static'));
 
 // Bootstrap variables to template
 app.use((req, res, next) => {
-    res.locals.referer = req.header('Referer') || '';
+    res.locals.referer = req.headers['referer'] || '';
     res.locals.currentUser = req.session.userId;
     res.locals.config = config;
     next();

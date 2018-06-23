@@ -43,13 +43,15 @@ router.get('/pick', (req, res, next) => {
                 'hippie meal': 'https://media.giphy.com/media/d1FL4zXfIQZMWFQQ/giphy.gif',
             };
 
-            const key = restaurant.cuisine.toLowerCase();
-
             let giphyUrl;
-            if (key in gifs) {
-                giphyUrl = gifs[key];
-            } else {
-                giphyUrl = gifs.others;
+            if (restaurant && restaurant.cuisine) {
+                const key = restaurant.cuisine.toLowerCase();
+
+                if (key in gifs) {
+                    giphyUrl = gifs[key];
+                } else {
+                    giphyUrl = gifs.others;
+                }
             }
 
             // Render

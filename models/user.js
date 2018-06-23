@@ -77,11 +77,9 @@ UserSchema.statics.isAuthenticated = function(req) {
 
 // Hash password
 UserSchema.pre('save', function(next) {
-    const user = this;
-    bcrypt.hash(user.password, 10, (err, hash) => {
+    bcrypt.hash(this.password, 10, (err, hash) => {
         if (err) return next(err);
-        user.password = hash;
-        user.updated = new Date();
+        this.password = hash;
         next();
     });
 });
@@ -89,8 +87,7 @@ UserSchema.pre('save', function(next) {
 
 // Update `update` field on update
 UserSchema.pre('update', function(next) {
-    const user = this;
-    user.updated = new Date();
+    this.updated = new Date();
     next();
 });
 
