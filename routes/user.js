@@ -148,11 +148,9 @@ router.post('/change-password', requireLogin, (req, res, next) => {
             });
         });
     } else {
-        if (err) {
-            const err = new Error('All fields are required!');
-            err.status = 400;
-            return next(err);
-        }
+        const err = new Error('All fields are required!');
+        err.status = 400;
+        return next(err);
     }
 });
 
