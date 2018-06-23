@@ -69,6 +69,20 @@ UserSchema.statics.authenticate = function(email, password, callback) {
 };
 
 
+// Check if password is a match
+UserSchema.methods.isPasswordMatch = function(password, callback) {
+    bcrypt.compare(password, this.password, function(error, result) {
+        if (error) {
+            const err = new Error('Could not compare password');
+            err.status = 500;
+            return callback(err);
+        }
+
+        return callback(null, result);
+    });
+};
+
+
 // Checks if the user is authenticated
 UserSchema.statics.isAuthenticated = function(req) {
     return req.session.userId || false;

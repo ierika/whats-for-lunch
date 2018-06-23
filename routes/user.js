@@ -117,7 +117,7 @@ router.get('/change-password', requireLogin, (req, res, next) => {
 
 // Change password processor
 router.post('/change-password', requireLogin, (req, res, next) => {
-    if (req.body.password && req.body.verifyPassword) {
+    if (req.body.currentPassword, req.body.password && req.body.verifyPassword) {
         // If passwords do not match
         if (req.body.password !== req.body.verifyPassword) {
             const err = new Error('Passwords do not match!');
@@ -128,10 +128,23 @@ router.post('/change-password', requireLogin, (req, res, next) => {
         // Update database
         User.findById(req.session.userId, (err, user) => {
             if (err) return next(err);
-            user.password = req.body.password;
-            user.save((err, user) => {
+
+            // Check if current password is a match
+            user.isPasswordMatch(req.body.currentPassword, (err, result) => {
                 if (err) return next(err);
-                res.redirect(req.baseUrl + '/profile');
+
+                if (result === true) {
+                    // If password is ok, save password
+                    user.password = req.body.password;
+                    user.save((err, user) => {
+                        if (err) return next(err);
+                        res.redirect(req.baseUrl + '/profile');
+                    });
+                } else {
+                    const err = new Error('Current password you entered was wrong.');
+                    err.status = 403;
+                    return next(err);
+                }
             });
         });
     } else {

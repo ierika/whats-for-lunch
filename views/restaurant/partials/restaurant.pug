@@ -1,14 +1,17 @@
-if restaurant.cuisine
-    p.restaurant-cuisine= restaurant.cuisine
-h3.restaurant-name.text-red= restaurant.name
-if restaurant.description
-    p.restaurant-description= restaurant.description
+if restaurant
+    if restaurant.cuisine
+        p.restaurant-cuisine= restaurant.cuisine
+    h3.restaurant-name.text-red= restaurant.name
+    if restaurant.description
+        p.restaurant-description= restaurant.description
 
-.my-1 &nbsp;
+    .my-1 &nbsp;
 
-if restaurant.cuisine
-    div
-        img(src="/static/img/giphy.png", width="120")
-        br
-        if giphyUrl
-            img(src=giphyUrl).giphy.mb-3
+    if restaurant.cuisine
+        div
+            img(src="/static/img/giphy.png", width="120")
+            br
+            if giphyUrl
+                img(src=giphyUrl).giphy.mb-3
+else
+    h4.red-text No restaurant to show
