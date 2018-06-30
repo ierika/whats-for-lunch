@@ -42,8 +42,7 @@ const UserSchema = new mongoose.Schema({
  * Statics
  */
 UserSchema.statics.authenticate = function(email, password, callback) {
-    console.log('Authenticating user...');
-    User.findOne({ email: email })
+    this.findOne({ email: email })
         .exec(function(error, user) {
             // Return any errors from the query
             if (error) return callback(error);
@@ -90,12 +89,55 @@ UserSchema.statics.isAuthenticated = function(req) {
 
 
 // Hash password
-UserSchema.pre('save', function(next) {
-    bcrypt.hash(this.password, 10, (err, hash) => {
-        if (err) return next(err);
-        this.password = hash;
-        next();
+UserSchema.statics.hashPassword = function hashPassword(password, callback) {
+    bcrypt.hash(password, 10, (err, hash) => {
+        if (err) return callback(err);
+        return callback(null, hash);
     });
+}
+
+// Create account
+UserSchema.statics.createAccount = function(postData, callback) {
+    if (postData && postData.password) {
+        // Hash password first
+        this.hashPassword(postData.password, (err, hash) => {
+            if (err) {
+                const err = new Error('Could not encrypt password');
+                err.status(500);
+                return callback(err);
+            }
+
+            postData.password = hash;
+
+            // Then create account
+            this.create(postData, (err, user) => {
+                if (err) return callback(err);
+                return callback(null, user);
+            });
+        });
+    }
+};
+
+
+// Change password
+UserSchema.methods.changePassword = function(newPassword, callback) {
+    this.constructor.hashPassword(newPassword, (err, hash) => {
+        if (err) return callback(err);
+
+        this.password = hash;
+
+        this.save((err, user) => {
+            if (err) return callback(err);
+            return callback(err, user);
+        });
+    });
+};
+
+
+// Hash password
+UserSchema.pre('save', function(next) {
+    this.updated = new Date();
+    next();
 });
 
 

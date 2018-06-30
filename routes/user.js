@@ -73,13 +73,16 @@ router.post('/signup', (req, res, next) => {
             return next(err);
         }
 
-        // Create user object and save to database
-        User.create(req.body, (err, user) => {
-            if (err) return next(err);
-            console.log(user);
-            console.log('User created');
-            res.redirect('/user/profile');
-        })
+        // Finally, create user object and save to database
+        User.createAccount(req.body, (err, user) => {
+            if (user) {
+                console.log(user);
+                console.log('User created');
+                res.redirect('/user/profile');
+            } else {
+                if (err) return next(err);
+            }
+        });
     } else {
         const err = new Error('All fields are required');
         err.status = 400;
@@ -135,8 +138,7 @@ router.post('/change-password', requireLogin, (req, res, next) => {
 
                 if (result === true) {
                     // If password is ok, save password
-                    user.password = req.body.password;
-                    user.save((err, user) => {
+                    user.changePassword(req.body.password, (err, user) => {
                         if (err) return next(err);
                         res.redirect(req.baseUrl + '/profile');
                     });

@@ -29,7 +29,7 @@ const config = {
     BASE_DIR: __dirname,
     SITE_NAME: "What's for lunch?",
     SLOGAN: "Make up your mind!",
-    GIPHY_API_KEY: process.env.GIPHY_API_KEY,
+    GIPHY_API_KEY: process.env.GIPHY_API_KEY || '',
 };
 
 
@@ -99,10 +99,12 @@ app.use((err, req, res, next) => {
 
 
 // Server
-app.listen(config.PORT, err => {
+const server = app.listen(config.PORT, err => {
     if (err) {
         console.error(err.message);
         process.exit(1);
     }
     console.log(`This app is running at port: ${ config.PORT }`);
 });
+
+module.exports = server;
