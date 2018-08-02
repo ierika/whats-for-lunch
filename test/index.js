@@ -189,12 +189,6 @@ describe('Routes', () => {
                 .get('/user/signup')
                 .expect(200, done);
         });
-
-        it('should return HTTP 400 bad request if no fields are entered', done => {
-            request(server)
-                .post('/user/signup')
-                .expect(400, done);
-        });
     });
 });
 
