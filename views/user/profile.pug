@@ -4,7 +4,7 @@ block content
     .row
         .col.s12.center-align.mt-2
             // todo: must make a gravatar hasher
-            img(src="https://s.gravatar.com/avatar/06c32121112801e78613e055365f5448?s=400").gravatar
+            img(src=`https://s.gravatar.com/avatar/${emailHash}?s=400`).gravatar
 
     form(action="", method="POST")#registerForm.mt-2
         .row

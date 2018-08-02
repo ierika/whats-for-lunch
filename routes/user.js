@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const User = require('../models/user');
 const requireLogin = require('../middleware').requireLogin;
+const crypto = require('crypto');
 
 
 // GET /login
@@ -98,7 +99,11 @@ router.get('/profile', requireLogin, (req, res, next) => {
     User.findById(userId)
         .exec(function(err, user) {
             if (err) return next(err);
-            res.render('user/profile', { user });
+
+            // Get md5 hash of the user's email for the gravatar
+            const emailHash = crypto.createHash('md5').update(user.email).digest("hex");
+
+            res.render('user/profile', { user, emailHash });
         });
 });
 
