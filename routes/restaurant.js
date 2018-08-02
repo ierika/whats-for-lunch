@@ -109,7 +109,7 @@ router.post('/:id', (req, res) => {
         restaurant.save((err, restaurant) => {
             if (err) return next(err);
             res.status(200);
-            res.redirect('restaurant/list');
+            res.redirect('/restaurant/list');
         });
     });
 });
